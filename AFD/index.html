@@ -15,23 +15,29 @@
             <div class="entradas">
                 <label>Q</label>
                 <input type="text" id="conjunto_de_estados" placeholder="Conjunto de estados = {q0,q1,q2,...}" oninput="geraDelta()"/>
+                <button onclick="printaInput('conjunto_de_estados')">Printar input</button>
             </div>
             
             <div class="entradas">
                 <label>Σ</label>
-                <input id="alfabeto" placeholder="Alfabeto"/>
+                <input id="alfabeto" placeholder="Alfabeto = ABC..."/>
+                <button onclick="printaInput('alfabeto')">Printar input</button>
             </div>
 
             <div class="entradas">
-                <label>Estado Inicial</label>
-                <input id="estado_inicial" placeholder="q0,q1,...       *só pode haver um estado"/>
+                <label>Q₀</label>
+                <input id="estado_inicial" placeholder="Estado final = Qₓ (só pode haver um estado)"/>
+                <button onclick="printaInput('estado_inicial')">Printar input</button>
             </div>
 
             <div class="entradas">
                 <label>F</label>
                 <input id="conjunto_de_estados_finais" placeholder="Conjunto de estados finais = {q1, q3, ...}"/>
+                <button onclick="printaInput('conjunto_de_estados_finais')">Printar input</button>
             </div>
         </div>
+
+        
 
         <!-- 2° grupo: delta(δ) -->
         <!-- Tabela dinâmica
