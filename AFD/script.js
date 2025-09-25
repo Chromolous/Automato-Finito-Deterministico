@@ -57,3 +57,22 @@ function geraDelta(){
     
     
 }
+
+function printaInput(input) {
+    let entrada = document.getElementById(input);
+    let conjuntos = null;
+    if (input == "conjunto_de_estados") {
+        conjuntos = validaEstados();
+    }
+    console.log(entrada.value);
+    console.log(conjuntos);
+    alert(entrada.value + conjuntos);
+}
+
+function validaEstados() {
+    let entrada = document.getElementById("conjunto_de_estados");
+    let formatado = entrada.value.replace(" ","");
+    let conjunto = formatado.split(',');
+
+    return conjunto
+}
