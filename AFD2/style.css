@@ -1,0 +1,122 @@
+:root{
+    background: #ede8d0 ;
+}
+
+h1{
+    left: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 31px;
+}
+h3 {
+    position: relative;
+}
+
+input{
+    background: #b9c3e9;
+}
+
+.grade {
+    height:max-content;
+    width: max-content;
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    grid-template-areas: 
+        "div1 div3 div3"
+        "div2 div3 div3";
+}
+
+/*1° grupo: Q|Σ|Estado Inicial|F
+    Entradas independentes*/
+.container{
+    grid-area: div1;
+    position: absolute;
+    background: #d2dbfa;
+    border-radius: 25px;
+    padding: 15px;
+    width: fit-content;
+    height: 113px;
+    box-shadow: 3px 3px #b9c3e9;
+}
+.entradas{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.entradas label{
+    width: 220px;
+    font-weight: bold;
+}
+.entradas input{
+    color: #080052;
+    width: 300px;
+}
+
+/*2° grupo: delta(δ)
+    Tabela Delta*/
+.tabela{
+    grid-area: div2;
+    position: relative;
+    top: -480px;
+    background: #d2dbfa;
+    border-radius: 25px;
+    padding: 15px;
+    min-width: 532px;
+    max-width: 532px;
+}
+table{
+    border-color: #99999942;
+    border-collapse: collapse;
+}
+caption{
+    text-align: left;
+    position: relative;
+    top: -4px;
+    left: 2px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+th, td{
+    padding: 5px;
+    text-align: center;
+}
+th{
+    background-color: #ede8d0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+td{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: #b9c3e9;
+}
+td:hover {
+    background-color: #aab3d8;
+}
+
+body{
+    display: block;
+}
+
+/*3° grupo: exibição*/
+.tela {
+    grid-area: div3;
+    border-radius: 25px;
+    position: relative;
+    top: -50px;
+    left: 270px;
+    float: right;
+    height: 800px;
+    width: 100vh;
+    display: flex;
+    background-color: white;
+}
+
+.tela h2{
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+    top: -50px;
+    left: 320px;
+}
+
