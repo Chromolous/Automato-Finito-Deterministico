@@ -1,0 +1,63 @@
+:root{
+    background: #ede8d0 ;
+}
+
+input{
+    background: #b9c3e9;
+}
+
+/*1° grupo: Q|Σ|Estado Inicial|F
+    Entradas independentes*/
+.container{
+    background: #d2dbfa;
+    border-radius: 25px;
+    padding: 15px;
+    width: 532px;
+    height: 113px;
+    box-shadow: 3px 3px #b9c3e9;
+}
+.entradas{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.entradas label{
+    width: 220px;
+    font-weight: bold;
+}
+.entradas input{
+    color: #080052;
+    width: 300px;
+}
+
+/*2° grupo: delta(δ)
+    Tabela Delta*/
+.tabela{
+    position: relative;
+    top: 30px;
+    background: #d2dbfa;
+    border-radius: 25px;
+    padding: 15px;
+    min-height: 100px;
+    max-width: 532px;
+}
+table{
+    border-radius: 25px;
+    border-collapse: collapse;
+}
+caption{
+    text-align: var(100px);
+}
+th, td{
+    padding: 5px;
+    text-align: center;
+}
+td{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: #b9c3e9;
+}
+td:hover {
+    background-color: #aab3d8;
+}
