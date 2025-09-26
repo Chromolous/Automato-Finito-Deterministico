@@ -1,5 +1,17 @@
-:root{
+:root {
     background: #ede8d0 ;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body { 
+    font-family: Arial, 
+    sans-serif; 
+    margin: 20px; 
+    color: #15100F
 }
 
 h1{
@@ -7,71 +19,79 @@ h1{
     font-family: 'Courier New', Courier, monospace;
     font-size: 31px;
 }
+
 h3 {
-    position: relative;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 input{
     background: #b9c3e9;
 }
 
-.grade {
-    height:max-content;
-    width: max-content;
+.container { 
+    margin-top: 10px;
     display: grid;
-    gap: 10px;
+    grid-auto-columns: 50%;
+    height: 80vh;
+    width: 100%;
+    border-radius: 35px;
     padding: 10px;
-    grid-template-areas: 
-        "div1 div3 div3"
-        "div2 div3 div3";
+    box-shadow: inset 0px 0px 10px -3px ;
 }
 
-/*1° grupo: Q|Σ|Estado Inicial|F
-    Entradas independentes*/
-.container{
-    grid-area: div1;
-    position: absolute;
+ /* grupo de inputs*/
+.entradas {
     background: #d2dbfa;
     border-radius: 25px;
     padding: 15px;
-    width: fit-content;
-    height: 113px;
+    width: 60%;
+    height: fit-content;
     box-shadow: 3px 3px #b9c3e9;
+    grid-column: 1;
+    grid-row: 1;
 }
-.entradas{
+
+.entrada {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 18px;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
-.entradas label{
-    width: 220px;
+.entrada label{
+    width: 30px;
     font-weight: bold;
 }
-.entradas input{
+.entrada input{
     color: #080052;
-    width: 300px;
+    width: 77%;
+}
+.entrada button{
+    width: 23%
 }
 
 /*2° grupo: delta(δ)
     Tabela Delta*/
+
 .tabela{
-    grid-area: div2;
-    position: relative;
-    top: -480px;
     background: #d2dbfa;
     border-radius: 25px;
     padding: 15px;
-    min-width: 532px;
-    max-width: 532px;
+    width: 60%;
+    height: fit-content;
+    box-shadow: 3px 3px #b9c3e9;
+    grid-column: 1;
+    grid-row: 2;
 }
+
 table{
-    border-color: #99999942;
     border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
 }
+
 caption{
-    text-align: left;
+    text-align: center;
     position: relative;
     top: -4px;
     left: 2px;
@@ -86,37 +106,35 @@ th, td{
 th{
     background-color: #ede8d0;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
 }
 td{
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background: #b9c3e9;
+
 }
 td:hover {
     background-color: #aab3d8;
 }
 
-body{
-    display: block;
-}
-
 /*3° grupo: exibição*/
 .tela {
-    grid-area: div3;
+    grid-column: 2;
+    grid-row: 1 / span 2;
     border-radius: 25px;
-    position: relative;
-    top: -50px;
-    left: 270px;
-    float: right;
-    height: 800px;
-    width: 100vh;
+    height: 100%;
+    width: 100%;
+    gap: 5px;
     display: flex;
-    background-color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.tela h2{
-    font-family: 'Courier New', Courier, monospace;
-    position: relative;
-    top: -50px;
-    left: 320px;
+.canvas {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
 }
 
