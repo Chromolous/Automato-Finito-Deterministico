@@ -6,69 +6,56 @@
     </head>
     <body>
         <h1>Automato Finito Determinístico</h1>
-        <h3>Subtítulo</h3>
-        <p>A</p>
+        <h3>Alex da Silva<br>Paulo da Silva</h3>
+        <p></p>
 
         <!-- 1° grupo: Q|Σ|Estado Inicial|F -->
         <!-- Entradas independentes-->
-        <div class="grade">
-            <div class="container">
-                <div class="entradas">
+
+        <div class="container">
+            <div class="entradas">
+                <div class="entrada">
                     <label>Q</label>
-                    <input type="text" id="conjunto_de_estados" placeholder="Conjunto de estados = {q0,q1,q2,...}" oninput="geraDelta()"/>
-                    <button onclick="printaInput('conjunto_de_estados')">Printar input</button>
+                    <input type="text" id="conjunto_de_estados" placeholder="Conjunto de estados: q0, q1, q2, ..." oninput="validaEstados();attTabelaFunc();desenhaEstados()"/>
+                    <button onclick="desenhaEstados()">Printar input</button>
                 </div>
                 
-                <div class="entradas">
+                <div class="entrada">
                     <label>Σ</label>
-                    <input id="alfabeto" placeholder="Alfabeto = {A, BC, 0, λ...}"/>
-                    <button onclick="printaInput('alfabeto')">Printar input</button>
+                    <input id="alfabeto" placeholder="Alfabeto: A, BC, 0, λ..." oninput="validaAlfabeto();attTabelaFunc()"/>
                 </div>
-    
-                <div class="entradas">
+
+                <div class="entrada">
                     <label>Q₀</label>
-                    <input id="estado_inicial" placeholder="Estado final = Qₓ (só pode haver um estado)"/>
-                    <button onclick="printaInput('estado_inicial')">Printar input</button>
+                    <input id="estado_inicial" placeholder="Estado inicial: qₓ (só pode haver um estado)" oninput="recebeEInicial();desenhaEstados()"/>
                 </div>
-    
-                <div class="entradas">
+
+                <div class="entrada">
                     <label>F</label>
-                    <input id="conjunto_de_estados_finais" placeholder="Conjunto de estados finais = {q1, q3, ...}"/>
-                    <button onclick="printaInput('conjunto_de_estados_finais')">Printar input</button>
+                    <input id="conjunto_de_estados_finais" placeholder="Estados finais: q1, q2, q3, ..." oninput="validaFinais();desenhaEstados()"/>
                 </div>
             </div>
 
-            <!-- 2° grupo: delta(δ) -->
-            <!-- Tabela dinâmica
-            gerada a partir do conjunto de estados(linha)
-            e do alfabeto(colunas)-->
             <div class="tabela">
                 <table id="tabelaDelta">
                     <caption>δ - Funções de Transição</caption>
+                    <thead>
+                        <tr>
+                            <th style="width: 2rem;">δ</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr>
-                            <th>Company</th>
-                            <th>Contact</th>
-                            <th>Country</th>
-                        </tr>
-                        <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Maria Anders</td>
-                            <td>Germany</td>
-                        </tr>
-                        <tr>
-                            <td>Centro comercial Moctezuma</td>
-                            <td>Francisco Chang</td>
-                            <td>Mexico</td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
-
-            <!-- 3° grupo: tela de exibição-->
             <div class="tela">
-                <h2>Modelo Gráfico do AFD</h2>
+                <h3>Modelo gráfico do AFD</h3>
+                <canvas id="tela" width="1000", height="1000" class="canvas"></canvas>
+                <input id="cadeia", placeholder="Testar cadeia">
             </div>
+
         </div>
+        
     </body>
 </html>
