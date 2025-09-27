@@ -16,23 +16,22 @@
             <div class="entradas">
                 <div class="entrada">
                     <label>Q</label>
-                    <input type="text" id="conjunto_de_estados" placeholder="Conjunto de estados: q0, q1, q2, ..." oninput="validaEstados();attTabelaFunc();desenhaEstados()" value="q0,q1,q2,q3"/>
-                    <button onclick="desenhaEstados()">Printar input</button>
+                    <input type="text" id="conjunto_de_estados" placeholder="Conjunto de estados: q0, q1, q2, ..." oninput="validaEstados();attTabelaFunc();desenhaEstados()" value="q0,q1 "/>
                 </div>
                 
                 <div class="entrada">
                     <label>Σ</label>
-                    <input id="alfabeto" placeholder="Alfabeto: A, BC, 0, λ..." oninput="validaAlfabeto();attTabelaFunc()" value="a,b,c,d"/>
+                    <input id="alfabeto" placeholder="Alfabeto: A, BC, 0, λ..." oninput="validaAlfabeto();attTabelaFunc()" value="a,b "/>
                 </div>
 
                 <div class="entrada">
                     <label>Q₀</label>
-                    <input id="estado_inicial" placeholder="Estado inicial: qₓ (só pode haver um estado)" oninput="recebeEInicial();desenhaEstados()"/>
+                    <input id="estado_inicial" placeholder="Estado inicial: qₓ (só pode haver um estado)" oninput="recebeEInicial();desenhaEstados()" value="q0 "/>
                 </div>
 
                 <div class="entrada">
                     <label>F</label>
-                    <input id="conjunto_de_estados_finais" placeholder="Estados finais: q1, q2, q3, ..." oninput="validaFinais();desenhaEstados()"/>
+                    <input id="conjunto_de_estados_finais" placeholder="Estados finais: q1, q2, q3, ..." oninput="validaFinais();desenhaEstados()" value="q1 "/>
                 </div>
             </div>
 
@@ -49,13 +48,13 @@
                     </tbody>
                 </table>
             </div>
+
             <div class="tela">
                 <h3>Modelo gráfico do AFD</h3>
                 <canvas id="tela" width="1000", height="1000" class="canvas"></canvas>
-                <input id="cadeia", placeholder="Testar cadeia">
+                <input id="cadeia", placeholder="Testar cadeia" oninput="recebeCadeia()">
+                <button onclick="validaCadeia()">Printar input</button>
             </div>
-
         </div>
-        
     </body>
 </html>

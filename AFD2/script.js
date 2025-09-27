@@ -3,6 +3,11 @@ alfabeto = []
 estado_incial = ""
 estados_finais = []
 
+cadeia = [];
+linhaAux = 0;
+colAux = 0;
+transicoes = [];
+
 canvas_x = 1000
 canvas_y = 1000
 
@@ -86,7 +91,7 @@ function desenhaTransicao() {
             let valor = row.cells[j].textContent;
             if (valor.length > 0) {
                 desenhaSeta(ctx, linha, valor, coluna)
-                console.log(`Estado ${linha} recebendo ${coluna} vai para ${valor}`)
+                /*console.log(`Estado ${linha} recebendo ${coluna} vai para ${valor}`)*/
             }
         }
     }
@@ -148,7 +153,7 @@ function estadoDraw(nome, x, y) {
 
 function validaEstados() {
     let entrada = document.getElementById("conjunto_de_estados");
-    let formatado = entrada.value.replace(" ","");
+    let formatado = entrada.value.replace(/\s+/g,"");
     let conjunto = formatado.split(',');
 
     estados = conjunto
@@ -158,7 +163,7 @@ function validaEstados() {
 
 function validaAlfabeto() {
     let entrada = document.getElementById("alfabeto");
-    let formatado = entrada.value.replace(" ","");
+    let formatado = entrada.value.replace(/\s+/g,"");
     let conjunto = formatado.split(',');
 
     alfabeto = conjunto
@@ -168,7 +173,7 @@ function validaAlfabeto() {
 
 function validaFinais() {
     let entrada = document.getElementById("conjunto_de_estados_finais");
-    let formatado = entrada.value.replace(" ","");
+    let formatado = entrada.value.replace(/\s+/g,"");
     let conjunto = formatado.split(',');
 
     estados_finais = conjunto
@@ -177,6 +182,60 @@ function validaFinais() {
 }
 
 function recebeEInicial() {
-    estado_incial = document.getElementById("estado_inicial").value
-
+    estado_incial = document.getElementById("estado_inicial").value.replace(/\s+/g, "");
 }
+
+function recebeCadeia() {
+    let entrada = document.getElementById("cadeia");
+    let formatado = entrada.value.replace(" ","").replace(",", "");
+    let conjunto = formatado.split('');
+ 
+    cadeia = conjunto
+
+    return conjunto
+}
+
+function validaCadeia() {
+    getInfoTable();
+    const tabTransicao = document.getElementById("tabelaDelta");
+    
+    var estado_atual = estado_incial;
+
+    for(var c = 0; c<cadeia.length; c++) {
+        for( t = 0; t<transicoes.length; t++) {
+            if((cadeia[c] == transicoes[t][1]) && (estado_atual == transicoes[t][2])) {
+                console.log(`Estado atual: ${estado_atual} Recebeu: ${cadeia[c]} Próximo estado: ${transicoes[t][0]}`);
+                estado_atual = transicoes[t][0];
+                break;
+            }
+        }
+        if(!estados.includes(estado_atual)){
+            alert("não");
+            return;
+        }
+    }
+    estados_finais.includes(estado_atual) ? console.log("sim") : alert("não");
+}
+
+function getInfoTable() {
+    const tabTransicao = document.getElementById("tabelaDelta")
+    let linhaCabec = tabTransicao.rows[0]
+
+    for (var i = 1, row; row = tabTransicao.rows[i]; i++) {
+        for (var j = 1, col; col = linhaCabec.cells[j]; j++) {
+            transicoes.push([row.cells[j].textContent, col.textContent, row.cells[0].textContent]);
+        }
+    }
+}
+
+    /*for (var j = 1, col; col = linhaCabec.cells[j]; j++) {
+        for (var i = 1, row; row = tabTransicao.rows[i]; i++) {
+            let coluna = col.textContent;
+            let linha = row.cells[0].textContent;
+            let valor = row.cells[j].textContent;
+            if (valor.length > 0) {
+                desenhaSeta(ctx, linha, valor, coluna)
+                console.log(Estado ${linha} recebendo ${coluna} vai para ${valor})
+            }
+        }
+    }*/
