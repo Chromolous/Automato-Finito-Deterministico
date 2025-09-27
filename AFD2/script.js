@@ -197,7 +197,6 @@ function recebeCadeia() {
 
 function validaCadeia() {
     getInfoTable();
-    const tabTransicao = document.getElementById("tabelaDelta");
     
     var estado_atual = estado_incial;
 
@@ -227,15 +226,3 @@ function getInfoTable() {
         }
     }
 }
-
-    /*for (var j = 1, col; col = linhaCabec.cells[j]; j++) {
-        for (var i = 1, row; row = tabTransicao.rows[i]; i++) {
-            let coluna = col.textContent;
-            let linha = row.cells[0].textContent;
-            let valor = row.cells[j].textContent;
-            if (valor.length > 0) {
-                desenhaSeta(ctx, linha, valor, coluna)
-                console.log(Estado ${linha} recebendo ${coluna} vai para ${valor})
-            }
-        }
-    }*/
