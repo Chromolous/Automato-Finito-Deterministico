@@ -12,7 +12,9 @@ canvas_x = 1000
 canvas_y = 1000
 
 canvas_items = new Map()
-canvas_spacing = 150
+canvas_spacing = 200
+
+estados_pos = []
 
 function attTabelaFunc() {
     let thead = document.createElement("thead");
@@ -68,10 +70,11 @@ function desenhaEstados() {
     estados.forEach(estado => {
         canvas_items.set(estado,(posX,posY))
         estadoDraw(estado, posX, posY)
+        estados_pos.push([estado, posX, posY])
         posX = posX+canvas_spacing
         if (posX > canvas_x-50) {
             posY = posY+canvas_spacing
-            posX = canvas_item+canvas_spacing
+            posX = canvas_spacing
         }
     })
 }
@@ -84,70 +87,157 @@ function desenhaTransicao() {
     ctx.clearRect(0,0,canvas.width,canvas.height)
     desenhaEstados()
 
-    for (var j = 1, col; col = linhaCabec.cells[j]; j++) {
-        for (var i = 1, row; row = tabTransicao.rows[i]; i++) {
+    let setas = []
+
+    for (var i = 1, row; row = tabTransicao.rows[i]; i++) {
+        for (var j = 1, col; col = linhaCabec.cells[j]; j++) {
             let coluna = col.textContent;
             let linha = row.cells[0].textContent;
             let valor = row.cells[j].textContent;
-            if (valor.length > 0) {
-                desenhaSeta(ctx, linha, valor, coluna)
+            let concatenado = false
+            
+            if (valor.length > 0 && estados.includes(valor)) {
+
+                for (x=0;x<setas.length;x++) {
+                    console.log(setas[x])
+                    if ((setas[x][1] == linha) && (setas[x][2] == valor)) {
+                        console.log(`Encontrei ${linha} e ${valor} na coluna ${setas[x][3][0]} também`)
+                        let substituto = [ctx, linha, valor, [coluna].concat(setas[x][3])]
+                        setas[x] = substituto;
+                        concatenado = true;
+                    }
+                }
+
+                if (!concatenado) {
+                    setas.push([ctx, linha, valor, [coluna]])
+                }
+                console.log(setas)
+                
                 /*console.log(`Estado ${linha} recebendo ${coluna} vai para ${valor}`)*/
             }
         }
     }
+    setas.forEach(seta => {
+        desenhaSeta(seta[0], seta[1], seta[2], seta[3]);
+    })
 }
 
-function desenhaSeta(ctx, de, para, letra) {
+function getEstadoPos(estado) {
+    let x = null
+    let y = null
+    estados_pos.forEach(est => {
+        if (est[0] == estado) {
+            x = est[1]
+            y = est[2]
+        }
+    })
+    return [x, y]
+}
+
+function desenhaSeta(ctx, de, para, letras) {
     ctx.beginPath();
     ctx.strokeStyle = 'black';
     ctx.fillStyle = 'black';
+    let espacamento = 20;
+
+    let [deX,deY] = getEstadoPos(de);
+    let [paraX,paraY] = getEstadoPos(para);
+
+    console.log(letras)
 
     if (de == para) {
-        ctx.arc(canvas_spacing-60, canvas_spacing+60, 20, 0, Math.PI+(Math.PI/2))
+        ctx.arc(deX-60, deY+60, 20, 0, Math.PI+(Math.PI/2))
         ctx.stroke();
         ctx.closePath();
 
         ctx.beginPath();
-        ctx.arc(canvas_spacing-60, canvas_spacing+40, 5, 0, 2*Math.PI)
+        ctx.arc(deX-60, deY+40, 5, 0, 2*Math.PI)
         ctx.fill()
         ctx.font = "28px serif";
-        ctx.fillText(letra, canvas_spacing-60,canvas_spacing+110);
+        for (i = 0; i < letras.length; i++) {
+            ctx.fillText(letras[i], deX-65+(espacamento*i)-(espacamento*letras.length/2),deY+110);
+        }
+        
         ctx.closePath(); 
-    } else {
-        ctx.moveTo(canvas_spacing+50, canvas_spacing);
-        ctx.lineTo(canvas_spacing+100, canvas_spacing);
-        ctx.stroke();
+    } else if (estados.includes(para)) {
+        if (paraX-deX > 50+canvas_spacing) {
+            ctx.moveTo(deX, deY+50);
+            ctx.lineTo(deX, deY+75);
+            ctx.lineTo(paraX, paraY+75);
+            ctx.lineTo(paraX, paraY+50);
 
-        ctx.font = "28px serif";
-        ctx.fillText(letra, canvas_spacing+75,canvas_spacing+20)
+            ctx.stroke();
+            ctx.font = "28px serif";
+            for (i = 0; i < letras.length; i++) {
+                ctx.fillText(letras[i], paraX-deX+(espacamento*i)-(espacamento*letras.length/2),deY+100);
+            }
+            ctx.closePath();
 
-        const angle = Math.atan2(canvas_spacing - canvas_spacing, canvas_spacing+50);
+            ctx.beginPath();
 
-        ctx.moveTo(canvas_spacing+100, canvas_spacing);
-        ctx.lineTo(canvas_spacing+100 - 15 * Math.cos(angle - Math.PI / 6), canvas_spacing - 15 * Math.sin(angle - Math.PI / 6));
-        ctx.lineTo(canvas_spacing+100 - 15 * Math.cos(angle + Math.PI / 6), canvas_spacing - 15 * Math.sin(angle + Math.PI / 6));
-        ctx.closePath();
-        ctx.fill();
+            const angle = Math.PI/6;
+
+            ctx.moveTo(paraX+8, paraY+65);
+            ctx.lineTo(paraX+8 - 15 * Math.cos(angle - Math.PI / 6), paraY+65 - 15 * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(paraX+8 - 15 * Math.cos(angle + Math.PI / 6), paraY+65 - 15 * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fill();
+
+        } else {
+            ctx.moveTo(deX+50, deY);
+            ctx.lineTo(paraX-50, paraY);
+            ctx.stroke();
+            ctx.font = "28px serif";
+            for (i = 0; i < letras.length; i++) {
+                ctx.fillText(letras[i], deX+(paraX-deX)/2+(espacamento*i)-(espacamento*letras.length/2),deY+25);
+                console.log(paraX);
+                console.log(deX);
+            }
+            ctx.closePath()
+
+            ctx.beginPath()
+
+            const angle = Math.atan2(paraY - deY, paraX-deX);
+
+            ctx.moveTo(paraX-50, paraY);
+            ctx.lineTo(paraX-50 - 15 * Math.cos(angle - Math.PI / 6), paraY - 15 * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(paraX-50 - 15 * Math.cos(angle + Math.PI / 6), paraY - 15 * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fill();
+        }
+
     }
-    
     
 }
 
 function estadoDraw(nome, x, y) {
-    let final = estados_finais.includes(nome)
+    let inicial = estado_incial == nome;
+    let final = estados_finais.includes(nome);
 
     const canvas = document.getElementById("tela");
     const ctx = canvas.getContext("2d");
     ctx.beginPath();
     ctx.arc(x, y, 50, 0, 2*Math.PI)
     ctx.stroke();
+
     if (final) {
         ctx.arc(x, y, 45, 0, 2*Math.PI)
         ctx.stroke();
     }
+    
     ctx.closePath();
     ctx.font = "28px serif";
     ctx.fillText(nome, x-12, y+5);
+
+    if (inicial) {
+        ctx.beginPath();
+        ctx.moveTo(x-60, y);
+        ctx.lineTo(x-80,y-20);
+        ctx.lineTo(x-80,y+20);
+        ctx.lineTo(x-60, y);
+        ctx.stroke();
+        ctx.closePath();
+    }
 }
 
 
@@ -209,20 +299,38 @@ function validaCadeia() {
             }
         }
         if(!estados.includes(estado_atual)){
-            alert("não");
-            return;
+            return false;
         }
     }
-    estados_finais.includes(estado_atual) ? console.log("sim") : alert("não");
+
+    return estados_finais.includes(estado_atual);
 }
 
 function getInfoTable() {
-    const tabTransicao = document.getElementById("tabelaDelta")
-    let linhaCabec = tabTransicao.rows[0]
+    const tabTransicao = document.getElementById("tabelaDelta");
+    let linhaCabec = tabTransicao.rows[0];
+
+    transicoes = [];
 
     for (var i = 1, row; row = tabTransicao.rows[i]; i++) {
         for (var j = 1, col; col = linhaCabec.cells[j]; j++) {
             transicoes.push([row.cells[j].textContent, col.textContent, row.cells[0].textContent]);
         }
+    }
+}
+
+function printaValidade() {
+    let input = document.getElementById("cadeia");
+    if (!(input.value.length > 0)) {
+        return;
+    }
+
+    valText = document.getElementById("validadeText");
+    if (validaCadeia()) {
+        valText.textContent = "Válido!"
+        valText.style.color = 'green'
+    } else {
+        valText.textContent = "Inválido!"
+        valText.style.color = 'red'
     }
 }
