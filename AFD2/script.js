@@ -183,6 +183,27 @@ function desenhaSeta(ctx, de, para, letras) {
             ctx.closePath();
             ctx.fill();
 
+        } else if(paraX<deX) {
+            ctx.moveTo(deX, deY-50);
+            ctx.lineTo(deX, deY-75);
+            ctx.lineTo(paraX, paraY-75);
+            ctx.lineTo(paraX, paraY-50);
+            ctx.stroke();
+            ctx.font = "28px serif";
+            for (i = 0; i < letras.length; i++) {
+                ctx.fillText(letras[i], paraX+(deX-paraX)/2+(espacamento*i)-(espacamento*letras.length/2),deY-100);
+            }
+            ctx.closePath();
+            ctx.beginPath();
+
+            const angle = Math.PI/2;
+
+            ctx.moveTo(paraX, paraY-50);
+            ctx.lineTo(paraX - 15 * Math.cos(angle - Math.PI / 6), paraY-50 - 15 * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(paraX - 15 * Math.cos(angle + Math.PI / 6), paraY-50 - 15 * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fill();
+
         } else {
             ctx.moveTo(deX+50, deY);
             ctx.lineTo(paraX-50, paraY);
