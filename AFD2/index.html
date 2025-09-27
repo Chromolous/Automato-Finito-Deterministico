@@ -16,7 +16,7 @@
             <div class="entradas">
                 <div class="entrada">
                     <label>Q</label>
-                    <input type="text" id="conjunto_de_estados" placeholder="Conjunto de estados: q0, q1, q2, ..." oninput="validaEstados();attTabelaFunc();desenhaEstados()" value="q0,q1 "/>
+                    <input type="text" id="conjunto_de_estados" placeholder="Conjunto de estados: q0, q1, q2, ..." oninput="validaEstados();attTabelaFunc();desenhaEstados();desenhaTransicao()" value="q0,q1,q2 "/>
                 </div>
                 
                 <div class="entrada">
@@ -26,12 +26,12 @@
 
                 <div class="entrada">
                     <label>Q₀</label>
-                    <input id="estado_inicial" placeholder="Estado inicial: qₓ (só pode haver um estado)" oninput="recebeEInicial();desenhaEstados()" value="q0 "/>
+                    <input id="estado_inicial" placeholder="Estado inicial: qₓ (só pode haver um estado)" oninput="recebeEInicial();desenhaEstados();desenhaTransicao()" value="q0 "/>
                 </div>
 
                 <div class="entrada">
                     <label>F</label>
-                    <input id="conjunto_de_estados_finais" placeholder="Estados finais: q1, q2, q3, ..." oninput="validaFinais();desenhaEstados()" value="q1 "/>
+                    <input id="conjunto_de_estados_finais" placeholder="Estados finais: q1, q2, q3, ..." oninput="validaFinais();desenhaEstados();desenhaTransicao()" value="q1 "/>
                 </div>
             </div>
 
@@ -52,8 +52,11 @@
             <div class="tela">
                 <h3>Modelo gráfico do AFD</h3>
                 <canvas id="tela" width="1000", height="1000" class="canvas"></canvas>
-                <input id="cadeia", placeholder="Testar cadeia" oninput="recebeCadeia()">
-                <button onclick="validaCadeia()">Printar input</button>
+                <div style="display: flex; flex-direction: row; gap: 10px;">
+                    <input id="cadeia", placeholder="Testar cadeia" oninput="recebeCadeia();printaValidade()">
+                    <h3 id="validadeText"></h3>
+                </div>
+                
             </div>
         </div>
     </body>
