@@ -100,16 +100,21 @@ function desenhaSeta(ctx, de, para, letra) {
     if (de == para) {
         ctx.arc(canvas_spacing-60, canvas_spacing+60, 20, 0, Math.PI+(Math.PI/2))
         ctx.stroke();
-        ctx.font = "28px serif";
-        ctx.fillText(letra, canvas_spacing-60,canvas_spacing+110)
         ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(canvas_spacing-60, canvas_spacing+40, 5, 0, 2*Math.PI)
+        ctx.fill()
+        ctx.font = "28px serif";
+        ctx.fillText(letra, canvas_spacing-60,canvas_spacing+110);
+        ctx.closePath(); 
     } else {
         ctx.moveTo(canvas_spacing+50, canvas_spacing);
         ctx.lineTo(canvas_spacing+100, canvas_spacing);
         ctx.stroke();
 
         ctx.font = "28px serif";
-        ctx.fillText(letra, canvas_spacing+75,canvas_spacing+10)
+        ctx.fillText(letra, canvas_spacing+75,canvas_spacing+20)
 
         const angle = Math.atan2(canvas_spacing - canvas_spacing, canvas_spacing+50);
 
@@ -172,6 +177,6 @@ function validaFinais() {
 }
 
 function recebeEInicial() {
-    estado_incial = documento.getElementById("estado_inicial").value
+    estado_incial = document.getElementById("estado_inicial").value
 
 }
