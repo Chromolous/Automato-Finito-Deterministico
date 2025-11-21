@@ -49,14 +49,30 @@
                 </table>
             </div>
 
+            <div class="tabela" style="visibility: hidden;"">
+                <table id="tabelaDelta">
+                    <caption>δ - Funções de Transição</caption>
+                    <thead>
+                        <tr>
+                            <th style="width: 2rem;">δ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
             <div class="tela">
-                <h3>Modelo gráfico do AFD</h3>
+                <h3>Modelo gráfico do AFD/AFND</h3>
+
                 <canvas id="tela" width="1300", height="1000" class="canvas"></canvas>
+
                 <div style="display: flex; flex-direction: row; gap: 10px;">
                     <input id="cadeia", placeholder="Testar cadeia" oninput="recebeCadeia();printaValidade()">
                     <h3 id="validadeText"></h3>
+                    <button>AFD Equivalente</button>
                 </div>
-                
             </div>
         </div>
     </body>

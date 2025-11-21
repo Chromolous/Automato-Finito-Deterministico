@@ -4,8 +4,6 @@ estado_incial = ""
 estados_finais = []
 
 cadeia = [];
-linhaAux = 0;
-colAux = 0;
 transicoes = [];
 
 canvas_x = 1000
@@ -93,28 +91,32 @@ function desenhaTransicao() {
         for (var j = 1, col; col = linhaCabec.cells[j]; j++) {
             let coluna = col.textContent;
             let linha = row.cells[0].textContent;
-            let valor = row.cells[j].textContent;
+            let valor = row.cells[j].textContent.split(",");
             let concatenado = false
-            
-            if (valor.length > 0 && estados.includes(valor)) {
 
-                for (x=0;x<setas.length;x++) {
-                    console.log(setas[x])
-                    if ((setas[x][1] == linha) && (setas[x][2] == valor)) {
-                        console.log(`Encontrei ${linha} e ${valor} na coluna ${setas[x][3][0]} também`)
-                        let substituto = [ctx, linha, valor, [coluna].concat(setas[x][3])]
-                        setas[x] = substituto;
-                        concatenado = true;
+            valor.forEach(estado => {
+                if (estado.length > 0 && estados.includes(estado)) {
+
+                    for (x=0;x<setas.length;x++) {
+                        console.log(setas[x])
+                        if ((setas[x][1] == linha) && (setas[x][2] == estado)) {
+                            console.log(`Encontrei ${linha} e ${estado} na coluna ${setas[x][3][0]} também`)
+                            let substituto = [ctx, linha, estado, [coluna].concat(setas[x][3])]
+                            setas[x] = substituto;
+                            concatenado = true;
+                        }
                     }
-                }
 
-                if (!concatenado) {
-                    setas.push([ctx, linha, valor, [coluna]])
+                    if (!concatenado) {
+                        setas.push([ctx, linha, estado, [coluna]])
+                    }
+                    console.log(setas)
+                    
+                    /*console.log(`Estado ${linha} recebendo ${coluna} vai para ${valor}`)*/
                 }
-                console.log(setas)
+            })
+            
                 
-                /*console.log(`Estado ${linha} recebendo ${coluna} vai para ${valor}`)*/
-            }
         }
     }
     setas.forEach(seta => {
@@ -309,22 +311,42 @@ function recebeCadeia() {
 function validaCadeia() {
     getInfoTable();
     
-    var estado_atual = estado_incial;
+    var estados_atuais = [estado_incial];
+    var estados_aux = []
+    let estados_afd = [estado_incial]
 
     for(var c = 0; c<cadeia.length; c++) {
-        for( t = 0; t<transicoes.length; t++) {
-            if((cadeia[c] == transicoes[t][1]) && (estado_atual == transicoes[t][2])) {
-                console.log(`Estado atual: ${estado_atual} Recebeu: ${cadeia[c]} Próximo estado: ${transicoes[t][0]}`);
-                estado_atual = transicoes[t][0];
-                break;
-            }
-        }
-        if(!estados.includes(estado_atual)){
-            return false;
-        }
+        estados_atuais.forEach(estado_atual => {
+            tesao = transicoes.filter((t) => (t[1] == cadeia[c]) && (t[2] == estado_atual));
+            tesao.forEach(element => {
+                estados_aux.push(...element[0])
+             });
+        })
+        estados_atuais = estados_aux
+        estados_afd.push([...estados_atuais].join(""))
+        
+        estados_aux = []
     }
 
-    return estados_finais.includes(estado_atual);
+    console.log(estados_atuais)
+    criaADF(new Set(estados_afd))
+
+    let val = false
+
+    estados_atuais.forEach(est => {
+        if (estados_finais.includes(est)) {
+            val = true
+        }
+    })
+
+    return val
+    
+}
+
+function criaADF(estadosADF) {
+    quintupla_estados = [...estadosADF]
+    quintupla_alfabeto = alfabeto
+    quintupla_
 }
 
 function getInfoTable() {
@@ -335,7 +357,7 @@ function getInfoTable() {
 
     for (var i = 1, row; row = tabTransicao.rows[i]; i++) {
         for (var j = 1, col; col = linhaCabec.cells[j]; j++) {
-            transicoes.push([row.cells[j].textContent, col.textContent, row.cells[0].textContent]);
+            transicoes.push([row.cells[j].textContent.split(","), col.textContent, row.cells[0].textContent]);
         }
     }
 }
