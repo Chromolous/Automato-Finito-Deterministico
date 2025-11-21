@@ -347,7 +347,7 @@ function criaADF(estadosADF) {
     quintupla_estados = [...estadosADF]
     quintupla_alfabeto = alfabeto
     quintupla_inicial = estado_incial
-    quintupla_finais = [...(estadosADF.filter((est) => estados_finais.includes(est)))]
+    quintupla_finais = [[...estadosADF].filter((est) => estados_finais.includes(est))]
 }
 
 function getInfoTable() {
