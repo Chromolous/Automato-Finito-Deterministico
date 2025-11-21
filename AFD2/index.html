@@ -35,9 +35,9 @@
                 </div>
             </div>
 
-            <div class="tabela">
+            <div class="tabelaAFN" id="tableNO">
                 <table id="tabelaDelta">
-                    <caption>δ - Funções de Transição</caption>
+                    <caption>δ - Funções de Transição do AFN</caption>
                     <thead>
                         <tr>
                             <th style="width: 2rem;">δ</th>
@@ -48,10 +48,9 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="tabela" style="visibility: hidden;"">
-                <table id="tabelaDelta">
-                    <caption>δ - Funções de Transição</caption>
+            <div class="thidden" id="tableDET">
+                <table id="tabelaAFD">
+                    <caption>δ - Funções de Transição do AFD</caption>
                     <thead>
                         <tr>
                             <th style="width: 2rem;">δ</th>
@@ -64,17 +63,21 @@
             </div>
 
             <div class="tela">
-                <h3>Modelo gráfico do AFD/AFND</h3>
-
-                <canvas id="tela" width="1300", height="1000" class="canvas"></canvas>
-
+                <canvas id="tela_AFD" width="1300", height="1000" class="hidden"></canvas>
+            </div>
+            <div class="tela">
+                <canvas id="tela_AFN" width="1300", height="1000" class="canvasAFN"></canvas>
+            </div>
+            <div class="tela">
+                <h3>Modelo gráfico do AFN/AFD</h3>
+                <canvas width="1300", height="1000" class="hidden"></canvas>
                 <div style="display: flex; flex-direction: row; gap: 10px;">
                     <input id="cadeia", placeholder="Testar cadeia" oninput="recebeCadeia();printaValidade()">
                     <h3 id="validadeText"></h3>
-                    <button>AFD Equivalente</button>
+                    <button type="button" id="mySwitch" onclick="transicao()" class="button">GERAR AFD</button>
                 </div>
             </div>
+            
         </div>
     </body>
 </html>
-

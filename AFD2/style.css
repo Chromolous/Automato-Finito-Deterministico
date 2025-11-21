@@ -73,15 +73,25 @@ input{
 /*2° grupo: delta(δ)
     Tabela Delta*/
 
-.tabela{
-    background: #d2dbfa;
+.tabelaAFN, .tabelaAFD, .thidden{
     border-radius: 25px;
     padding: 15px;
     width: 60%;
     height: fit-content;
-    box-shadow: 3px 3px #b9c3e9;
     grid-column: 1;
     grid-row: 2;
+}
+.tabelaAFN {
+    background: #d2dbfa;
+    box-shadow: 3px 3px #b9c3e9;
+}
+.tabelaAFD {
+    background: #b9c3e9;
+    box-shadow: 3px 3px #d2dbfa;
+}
+
+.thidden {
+    display: none;
 }
 
 table{
@@ -118,7 +128,7 @@ td:hover {
 }
 
 /*3° grupo: exibição*/
-.tela {
+.tela{
     grid-column: 2;
     grid-row: 1 / span 2;
     border-radius: 25px;
@@ -131,10 +141,37 @@ td:hover {
     height: 77vh;
 }
 
-.canvas {
-    background-color: white;
+
+.canvasAFN, .canvasAFD, .canvasM, .hidden{
     height: 90%;
     width: 100%;
     border-radius: 25px;
-    
+}
+.canvasAFN{
+    background-color: rgb(186, 199, 219);
+}
+.canvasAFD{
+    background-color: rgb(181, 182, 221);
+}
+.canvasM, .hidden {
+    opacity: 0;
+}
+
+
+.button {
+    background-color: rgba(0, 140, 255, 0.425);
+    border: none;
+    color: black;
+    padding: 3px 10px;
+    border-radius: 7px;
+    border: 2px solid #0800523a;
+    text-align: center;
+    display: inline;
+    font-size: 16px;
+    cursor: pointer;
+}
+.button:hover {
+    transition-duration: 0.5s;
+    background-color: #6f90fc;
+    color:white;
 }

@@ -27,7 +27,7 @@ function attTabelaFunc() {
             cell = row.insertCell()
             cell.setAttribute("contenteditable", "true")
             cell.addEventListener("input", function(e) {
-                desenhaTransicao();
+                desenhaTransicao("tela_AFN");
             });
         })
 
@@ -53,12 +53,12 @@ function attTabelaFunc() {
     document.querySelector("#tabelaDelta tbody").replaceWith(tbody)
     document.querySelector("#tabelaDelta thead").replaceWith(thead)
 
-    desenhaTransicao()
+    desenhaTransicao("tela_AFN")
     
 }
 
-function desenhaEstados() {
-    const canvas = document.getElementById("tela");
+function desenhaEstados(id_tabela) {
+    const canvas = document.getElementById(id_tabela);
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,canvas.width,canvas.height)
 
@@ -67,7 +67,7 @@ function desenhaEstados() {
 
     estados.forEach(estado => {
         canvas_items.set(estado,(posX,posY))
-        estadoDraw(estado, posX, posY)
+        estadoDraw(estado, posX, posY, id_tabela)
         estados_pos.push([estado, posX, posY])
         posX = posX+canvas_spacing
         if (posX > canvas_x-50) {
@@ -77,13 +77,13 @@ function desenhaEstados() {
     })
 }
 
-function desenhaTransicao() {
+function desenhaTransicao(id_tabela) {
     const tabTransicao = document.getElementById("tabelaDelta")
     let linhaCabec = tabTransicao.rows[0]
-    const canvas = document.getElementById("tela");
+    const canvas = document.getElementById(id_tabela);
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,canvas.width,canvas.height)
-    desenhaEstados()
+    desenhaEstados(id_tabela)
 
     let setas = []
 
@@ -233,11 +233,11 @@ function desenhaSeta(ctx, de, para, letras) {
     
 }
 
-function estadoDraw(nome, x, y) {
+function estadoDraw(nome, x, y, id_tabela) {
     let inicial = estado_incial == nome;
     let final = estados_finais.includes(nome);
 
-    const canvas = document.getElementById("tela");
+    const canvas = document.getElementById(id_tabela);
     const ctx = canvas.getContext("2d");
     ctx.beginPath();
     ctx.arc(x, y, 50, 0, 2*Math.PI)
@@ -375,5 +375,27 @@ function printaValidade() {
     } else {
         valText.textContent = "Inválido!"
         valText.style.color = 'red'
+    }
+}
+
+function transicao() {
+    var telaNAO = document.getElementById("tela_AFN");
+    var telaDET = document.getElementById("tela_AFD");
+
+    var tabelaNAO = document.getElementById("tableNO");
+    var tabelaDET = document.getElementById("tableDET");
+    if (telaNAO.classList.contains("hidden")) {
+        telaNAO.className = "canvasAFN";
+        telaDET.className = "hidden";
+
+        tabelaNAO.className = "tabelaAFN"
+        tabelaDET.className = "thidden"
+        
+    } else if (telaDET.classList.contains("hidden")) {
+        telaDET.className = "canvasAFD";
+        telaNAO.className = "hidden";
+
+        tabelaNAO.className = "thidden"
+        tabelaDET.className = "tabelaAFD"
     }
 }
