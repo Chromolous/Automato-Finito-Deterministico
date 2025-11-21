@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+    <title>Automato Finito</title>
     <head>
         <link rel="stylesheet" href="style.css"/>
         <script src="script.js"></script>
@@ -72,12 +73,11 @@
                 <h3>Modelo gráfico do AFN/AFD</h3>
                 <canvas width="1300", height="1000" class="hidden"></canvas>
                 <div style="display: flex; flex-direction: row; gap: 10px;">
-                    <input id="cadeia", placeholder="Testar cadeia" oninput="recebeCadeia();printaValidade()">
+                    <input id="cadeia", placeholder="Testar cadeia" oninput="recebeCadeia();printaValidade()" class="incadeia">
                     <h3 id="validadeText"></h3>
-                    <button type="button" id="mySwitch" onclick="transicao()" class="button">GERAR AFD</button>
+                    <button type="button" onclick="transicao()" class="button" id="Botao">Gerar AFD</button>
                 </div>
             </div>
-            
         </div>
     </body>
 </html>

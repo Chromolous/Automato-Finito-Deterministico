@@ -24,8 +24,13 @@ h3 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-input{
+input, .incadeia{
     background: #b9c3e9;
+    border: 0;
+    border-radius: 5px;
+}
+.incadeia {
+    text-align: center;
 }
 
 .container { 
@@ -74,6 +79,7 @@ input{
     Tabela Delta*/
 
 .tabelaAFN, .tabelaAFD, .thidden{
+    transition-duration: 0.5s;
     border-radius: 25px;
     padding: 15px;
     width: 60%;
@@ -166,12 +172,13 @@ td:hover {
     border-radius: 7px;
     border: 2px solid #0800523a;
     text-align: center;
+    font-weight: 550;
     display: inline;
     font-size: 16px;
     cursor: pointer;
 }
 .button:hover {
     transition-duration: 0.5s;
-    background-color: #6f90fc;
+    background-color: #080052;
     color:white;
 }

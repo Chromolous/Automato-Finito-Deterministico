@@ -346,7 +346,8 @@ function validaCadeia() {
 function criaADF(estadosADF) {
     quintupla_estados = [...estadosADF]
     quintupla_alfabeto = alfabeto
-    quintupla_
+    quintupla_inicial = estado_incial
+    quintupla_finais = [...(estadosADF.filter((est) => estados_finais.includes(est)))]
 }
 
 function getInfoTable() {
@@ -388,12 +389,16 @@ function transicao() {
         telaNAO.className = "canvasAFN";
         telaDET.className = "hidden";
 
+        document.getElementById("Botao").innerHTML = "Gerar AFD";
+
         tabelaNAO.className = "tabelaAFN"
         tabelaDET.className = "thidden"
         
     } else if (telaDET.classList.contains("hidden")) {
         telaDET.className = "canvasAFD";
         telaNAO.className = "hidden";
+
+        document.getElementById("Botao").innerHTML = "Retornar AFN";
 
         tabelaNAO.className = "thidden"
         tabelaDET.className = "tabelaAFD"
